@@ -1,0 +1,15 @@
+fort NODE_ENV: npm install --save-dev cross-env
+
+npm install supertest --save-dev
+
+
+
+
+
+
+
+
+
+
+How to run only specific test files (one way):
+npm test -- tests/blog_api.test.js

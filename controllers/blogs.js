@@ -2,24 +2,39 @@ const blogsRouter = require("express").Router();
 const Blog = require("../models/blog");
 
 //Get all blogitems
-blogsRouter.get("/", (request, response, next) => {
-  Blog.find({})
-    .then((blogs) => {
-      response.json(blogs);
-    })
-    .catch((error) => next(error));
+blogsRouter.get("/", async (request, response, next) => {
+  try {
+    const blogs = await Blog.find({});
+    response.json(blogs);
+  } catch (error) {
+    next(error);
+  }
 });
 
 //Post a new blogitem
-blogsRouter.post("/", (request, response, next) => {
-  const blog = new Blog(request.body);
+blogsRouter.post("/", async (request, response, next) => {
+  try {
+    const blog = new Blog(request.body);
+    if (!blog.title || !blog.url) {
+      return response.status(400).json({ error: "Title and URL are required" });
+    }
 
-  blog
-    .save()
-    .then((result) => {
-      response.status(201).json(result);
-    })
-    .catch((error) => next(error));
+    const savedBlog = await blog.save();
+    response.status(201).json(savedBlog);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//Delete blogitem
+
+blogsRouter.delete("/:id", async (request, response, next) => {
+  try {
+    await Blog.findByIdAndDelete(request.params.id);
+    response.status(200).json({ deletedId: request.params.id });
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = blogsRouter;

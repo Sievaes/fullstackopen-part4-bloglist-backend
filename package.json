@@ -8,17 +8,20 @@
   "devDependencies": {
     "@eslint/js": "^9.20.0",
     "@stylistic/eslint-plugin-js": "^4.0.1",
+    "cross-env": "^7.0.3",
     "eslint": "^9.20.1",
     "globals": "^16.0.0",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "supertest": "^7.0.0"
   },
   "name": "fullstackopen-part4-bloglist-backend",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "test": "cross-env NODE_ENV=test node --test",
+    "testserver": "cross-env NODE_ENV=test nodemon index.js",
     "lint": "eslint ."
   },
   "repository": {
