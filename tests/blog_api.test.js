@@ -103,6 +103,29 @@ describe("API tests", () => {
     const blogsAfterDelete = await helper.blogsInDb();
     assert.strictEqual(blogsAfterDelete.length, initialBlogs.length - 1);
   });
+
+  test("check that updating a blog works", async () => {
+    const initialBlog = await helper.blogsInDb();
+
+    const updatedBlog = {
+      title: "updatedTitle",
+      author: "updatedAuthor",
+      url: "URL",
+      id: initialBlog[0].id,
+      likes: 500,
+    };
+
+    const response = await api
+      .put(`/api/blogs/${initialBlog[0].id}`)
+      .send(updatedBlog)
+      .expect(200)
+      .expect("Content-Type", /application\/json/);
+
+    console.log(response.body);
+    console.log(initialBlog[0]);
+
+    assert.deepEqual(response.body, updatedBlog);
+  });
 });
 
 after(async () => {
