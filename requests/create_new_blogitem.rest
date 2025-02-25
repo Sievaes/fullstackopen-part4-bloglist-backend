@@ -6,7 +6,7 @@ Content-Type: application/json
   "title": "Title",
   "author": "Author",
   "url": "URL",
-  "likes": 200
+  "likes": 200,
 }
 
 

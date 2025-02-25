@@ -1,4 +1,5 @@
 const blogsRouter = require("express").Router();
+const jwt = require("jsonwebtoken");
 const Blog = require("../models/blog");
 
 //Get all blogitems
@@ -15,6 +16,7 @@ blogsRouter.get("/", async (request, response, next) => {
 blogsRouter.post("/", async (request, response, next) => {
   try {
     const blog = new Blog(request.body);
+
     if (!blog.title || !blog.url) {
       return response.status(400).json({ error: "Title and URL are required" });
     }
