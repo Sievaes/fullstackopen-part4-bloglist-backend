@@ -1,12 +1,13 @@
 
 POST http://localhost:3001/api/blogs/
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjY3YmYzZTI0ZThmZTk5MGI0OWVmOThkOCIsImlhdCI6MTc0MDY3NTMwMiwiZXhwIjoxNzQwNjc4OTAyfQ.emZGOXg75s8muFnlJLCDMZ1E6fqxhdEnCO-QYE_d-9Y
 
 {
-  "title": "Title",
+  "title": "tsest",
   "author": "Author",
   "url": "URL",
-  "likes": 200,
+  "likes": 200
 }
 
 

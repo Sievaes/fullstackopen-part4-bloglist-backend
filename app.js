@@ -26,9 +26,11 @@ app.use(cors()); // Use the CORS middleware to allow connections from different 
 app.use(express.json()); // Use the express.json() middleware to parse incoming JSON requests (request.body)
 
 app.use(middleware.requestLogger); // Use custom middleware to log information about incoming requests (GET, POST, ETC..)
+app.use(middleware.tokenExtractor);
+app.use(middleware.userExtractor);
 
 app.use("/api/login", loginRouter);
-app.use("/api/blogs", blogsRouter); // Use the blogsRouter for handling requests to /api/blogs
+app.use("/api/blogs", middleware.userExtractor, blogsRouter); // Use the blogsRouter for handling requests to /api/blogs
 app.use("/api/users", usersRouter);
 
 app.use(middleware.unknownEndpoint); // Use custom middleware to handle unknown endpoints

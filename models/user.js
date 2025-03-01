@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   blogs: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Blog",
+      ref: "Blog", // Reference to the Blog model
     },
   ],
 });
@@ -18,6 +18,7 @@ userSchema.set("toJSON", {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
     delete returnedObject._v;
+    // the passwordHash should not be revealed
     delete returnedObject.passwordHash;
   },
 });

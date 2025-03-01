@@ -19,7 +19,18 @@ loginRouter.post("/", async (request, response, next) => {
       });
     }
 
-    ////CONTINUE FROM HERE. REMINDER: WHEN LOGIN OK, A TOKEN WILL BE PROVIDED TO USER////
+    const userToken = {
+      username: user.username,
+      id: user._id,
+    };
+
+    const token = jwt.sign(userToken, process.env.SECRET, {
+      expiresIn: 60 * 60,
+    });
+
+    response
+      .status(200)
+      .send({ token, username: user.username, name: user.name });
   } catch (error) {
     next(error);
   }
