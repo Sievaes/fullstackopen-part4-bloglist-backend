@@ -84,13 +84,21 @@ blogsRouter.delete("/:id", async (request, response, next) => {
   }
 });
 
+//Update
 blogsRouter.put("/:id", async (request, response, next) => {
   try {
+    console.log(request.body);
     const updatedBlog = await Blog.findByIdAndUpdate(
       request.params.id,
       request.body,
-      { new: true }
-    );
+      {
+        new: true,
+      }
+    ).populate("user", {
+      username: 1,
+      name: 1,
+    });
+
     response.status(200).json(updatedBlog);
   } catch (error) {
     next(error);
