@@ -9,7 +9,9 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
+    "@playwright/test": "^1.51.0",
     "@stylistic/eslint-plugin-js": "^4.0.1",
+    "@types/node": "^22.13.10",
     "cross-env": "^7.0.3",
     "eslint": "^9.20.1",
     "globals": "^16.0.0",
@@ -22,8 +24,9 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "test": "cross-env NODE_ENV=test node --test",
-    "testserver": "cross-env NODE_ENV=test nodemon index.js",
+    "test": "cross-env NODE_ENV=test playwright test",
+    "start:test": "cross-env NODE_ENV=test nodemon index.js",
+    "nodetestrunner": "cross-env NODE_ENV=test node --test",
     "lint": "eslint ."
   },
   "repository": {
